@@ -13,14 +13,34 @@ fastlane add_plugin last_fabric_version_code
 ## About last_fabric_version_code
 
 Get the last Fabric version code for your Android app
-
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+This is specially useful if you want to auto-increment the version code for your beta builds or something.
 
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
+If you want to get the auto-increment version code feature in your Android app project, you can set up a new lane similar to this:
+```ruby
+lane :last_version do
+  last_version_code = last_fabric_version_code(username: 'your@email.com', password: 'y0urPassW0rd', app_package: 'com.android.example.app')
+  gradle(
+      task: 'assemble',
+      build_type: 'developDebug',
+      properties: { 'newVersionCode' => last_version_code }
+  )
+  # Deploy to Fabric
+end
+```
+
+And then, read the injected version code in your app's build.gradle like this:
+
+```groovy
+android {
+  defaultConfig {
+    versionCode project.hasProperty('newVersionCode') ? project.property('newVersionCode') as int : 1
+  }
+}
+```
 
 ## Run tests for this plugin
 
