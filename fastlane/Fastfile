@@ -1,0 +1,3 @@
+lane :test do
+  last_fabric_version_code
+end
