@@ -1,3 +1,4 @@
-lane :test do
-  last_fabric_version_code
+lane :last_version do
+  last_version_code = last_fabric_version_code(username: 'your@email.com', password: 'y0urPassW0rd', app_package: 'com.android.example.app')
+  UI.message("Version code from your last android app build on Fabric: #{last_version_code}")
 end
