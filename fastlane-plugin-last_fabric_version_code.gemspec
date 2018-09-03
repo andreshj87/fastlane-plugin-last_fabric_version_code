@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = 'andreshj87@gmail.com'
 
   spec.summary       = 'Get the last Fabric version code for your Android app'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-last_fabric_version_code"
+  spec.homepage      = "https://github.com/andreshj87/fastlane-plugin-last_fabric_version_code"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
