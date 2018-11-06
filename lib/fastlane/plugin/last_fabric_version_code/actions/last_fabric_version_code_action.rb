@@ -30,8 +30,15 @@ module Fastlane
         apps_parsed = JSON.parse(apps_response.body)
         apps_parsed.map do |app|
           if app['bundle_identifier'].casecmp(params[:app_package]).zero?
-            organization_id = app['organization_id']
-            app_id = app['id']
+            if params.has_key?(:platform)
+                if app['platform'].casecmp(params[:platform]).zero?
+                  organization_id = app['organization_id']
+                  app_id = app['id']
+                end
+            else
+              organization_id = app['organization_id']
+              app_id = app['id']
+            end
           end
         end
 
